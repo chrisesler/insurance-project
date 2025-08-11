@@ -96,19 +96,19 @@ export function VehicleInfoStep() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <FormField
               control={form.control}
               name="vehicleYear"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormLabel>Year</FormLabel>
-                  <Select 
+                  <Select
                     onValueChange={(value) => field.onChange(parseInt(value))} 
                     defaultValue={field.value?.toString()}
                   >
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select year" />
                       </SelectTrigger>
                     </FormControl>
@@ -133,7 +133,7 @@ export function VehicleInfoStep() {
                   <FormLabel>Make</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder={loadingMakes ? "Loading..." : "Select make"} />
                       </SelectTrigger>
                     </FormControl>
@@ -149,42 +149,42 @@ export function VehicleInfoStep() {
                 </FormItem>
               )}
             />
-          </div>
 
-          <FormField
-            control={form.control}
-            name="vehicleModel"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Model</FormLabel>
-                <Select 
-                  onValueChange={field.onChange} 
-                  defaultValue={field.value}
-                  disabled={!selectedMake || loadingModels}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder={
-                        !selectedMake 
-                          ? "Select make first" 
-                          : loadingModels 
-                            ? "Loading models..." 
-                            : "Select model"
-                      } />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {models.map((model, index) => (
-                      <SelectItem key={`${model.Model_ID}-${model.Model_Name}-${index}`} value={model.Model_Name}>
-                        {model.Model_Name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="vehicleModel"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Model</FormLabel>
+                  <Select 
+                    onValueChange={field.onChange} 
+                    defaultValue={field.value}
+                    disabled={!selectedMake || loadingModels}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder={
+                          !selectedMake 
+                            ? "Select make first" 
+                            : loadingModels 
+                              ? "Loading models..." 
+                              : "Select model"
+                        } />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {models.map((model, index) => (
+                        <SelectItem key={`${model.Model_ID}-${model.Model_Name}-${index}`} value={model.Model_Name}>
+                          {model.Model_Name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <FormField
             control={form.control}

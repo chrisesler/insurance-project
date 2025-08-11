@@ -4,17 +4,17 @@ import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+
 import { Badge } from '@/components/ui/badge';
 import { useQuote } from '@/lib/providers/quote-context';
 import { QuoteService, COVERAGE_OPTIONS } from '@/lib/services/quote-service';
-import { QuoteResult } from '@/types';
+import { QuoteData, QuoteResult } from '@/types';
 import { format } from 'date-fns';
-import { CheckCircle, DollarSign, Shield } from 'lucide-react';
+import { CheckCircle, Shield } from 'lucide-react';
 
 export function ReviewStep() {
   const { state, prevStep, clearStorage } = useQuote();
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
   const [quote, setQuote] = useState<QuoteResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,7 +24,7 @@ export function ReviewStep() {
     if (!quote && state.firstName && state.vehicleMake && state.coverageType) {
       setIsCalculating(true);
       try {
-        const calculatedQuote = QuoteService.calculateQuote(state as any);
+        const calculatedQuote = QuoteService.calculateQuote(state as QuoteData);
         setQuote(calculatedQuote);
       } catch (error) {
         console.error('Failed to calculate quote:', error);
@@ -227,9 +227,9 @@ export function ReviewStep() {
         <Button type="button" variant="outline" onClick={prevStep}>
           Back to Coverage
         </Button>
-        
-        <Button 
-          size="lg" 
+
+        <Button
+          size="lg"
           onClick={handleSubmitQuote}
           disabled={!quote || isSubmitting}
           className="min-w-[200px]"

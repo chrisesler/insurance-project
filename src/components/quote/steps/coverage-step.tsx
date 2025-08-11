@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useQuote } from '@/lib/providers/quote-context';
@@ -56,52 +57,57 @@ export function CoverageStep() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-base font-semibold">Coverage Type</FormLabel>
-                <div className="grid gap-4 mt-3">
-                  {Object.entries(COVERAGE_OPTIONS).map(([key, option]) => (
-                    <Card 
-                      key={key}
-                      className={`cursor-pointer transition-all ${
-                        field.value === key 
-                          ? 'ring-2 ring-primary border-primary' 
-                          : 'hover:border-gray-300'
-                      }`}
-                      onClick={() => field.onChange(key)}
-                    >
-                      <CardHeader className="pb-3">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-4 h-4 rounded-full border-2 ${
-                              field.value === key 
-                                ? 'border-primary bg-primary' 
-                                : 'border-gray-300'
-                            }`}>
-                              {field.value === key && (
-                                <CheckCircle className="w-4 h-4 text-white" fill="currentColor" />
-                              )}
-                            </div>
-                            <CardTitle className="text-lg">{option.name}</CardTitle>
-                          </div>
-                          {key === 'STANDARD' && (
-                            <Badge variant="secondary">Recommended</Badge>
-                          )}
-                        </div>
-                        <CardDescription className="text-sm">
-                          {option.description}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <ul className="space-y-1 text-sm text-muted-foreground">
-                          {option.features.map((feature, index) => (
-                            <li key={index} className="flex items-center space-x-2">
-                              <CheckCircle className="w-3 h-3 text-green-600" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                <FormControl>
+                  <RadioGroup 
+                    value={field.value} 
+                    onValueChange={field.onChange}
+                    className="grid gap-4 mt-3"
+                  >
+                    {Object.entries(COVERAGE_OPTIONS).map(([key, option]) => (
+                      <div key={key} className="relative">
+                        <label
+                          htmlFor={key}
+                          className="cursor-pointer"
+                        >
+                          <Card className={`cursor-pointer transition-all hover:border-gray-300 ${
+                            field.value === key 
+                              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 ring-2 ring-blue-500' 
+                              : 'border-gray-200'
+                          }`}>
+                            <CardHeader className="pb-3">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                  <RadioGroupItem 
+                                    value={key} 
+                                    id={key}
+                                    className="border-2 border-gray-400"
+                                  />
+                                  <CardTitle className="text-lg">{option.name}</CardTitle>
+                                </div>
+                                {key === 'STANDARD' && (
+                                  <Badge variant="secondary">Recommended</Badge>
+                                )}
+                              </div>
+                              <CardDescription className="text-sm">
+                                {option.description}
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="pt-0">
+                              <ul className="space-y-1 text-sm text-muted-foreground">
+                                {option.features.map((feature, index) => (
+                                  <li key={index} className="flex items-center space-x-2">
+                                    <CheckCircle className="w-3 h-3 text-green-600" />
+                                    <span>{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </CardContent>
+                          </Card>
+                        </label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
