@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Navbar } from '@/components/navbar';
-import { Shield, Clock, DollarSign, CheckCircle } from 'lucide-react';
+import { Shield, Code, Database, CheckCircle } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -13,16 +13,16 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Get Your Auto Insurance Quote in
-            <span className="text-blue-600"> 5 Simple Steps</span>
+            Django + Next.js
+            <span className="text-blue-600"> Full Stack Demo</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Compare coverage options and save money on your car insurance. 
-            Get an instant quote online in just minutes.
+            A modern full-stack application demonstrating Django REST API backend 
+            with Next.js frontend and Clerk authentication.
           </p>
-          <Link href="/quote">
+          <Link href="/dashboard">
             <Button size="lg" className="text-lg px-8 py-6 h-auto">
-              Get My Quote Now
+              View Dashboard
             </Button>
           </Link>
         </div>
@@ -33,20 +33,20 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <Card className="text-center">
             <CardContent className="p-6">
-              <Clock className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Quick & Easy</h3>
+              <Code className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Modern Stack</h3>
               <p className="text-gray-600">
-                Get your quote in under 5 minutes with our streamlined process
+                Next.js 15, TypeScript, Tailwind CSS, and ShadCN components
               </p>
             </CardContent>
           </Card>
           
           <Card className="text-center">
             <CardContent className="p-6">
-              <DollarSign className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Best Rates</h3>
+              <Database className="h-12 w-12 text-green-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Django API</h3>
               <p className="text-gray-600">
-                Compare multiple coverage options to find the best rate for you
+                Django REST Framework with PostgreSQL and JWT authentication
               </p>
             </CardContent>
           </Card>
@@ -54,36 +54,35 @@ export default function Home() {
           <Card className="text-center">
             <CardContent className="p-6">
               <Shield className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Secure & Trusted</h3>
+              <h3 className="text-xl font-semibold mb-2">Secure Auth</h3>
               <p className="text-gray-600">
-                Your personal information is protected with enterprise-grade security
+                Clerk authentication with seamless Django integration
               </p>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* Architecture Section */}
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            How It Works
+            Technology Stack
           </h2>
           <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-5 gap-8">
+            <div className="grid md:grid-cols-4 gap-8">
               {[
-                { step: 1, title: 'Personal Info', description: 'Tell us about yourself' },
-                { step: 2, title: 'Address', description: 'Where you live matters' },
-                { step: 3, title: 'Vehicle Details', description: 'Year, make, and model' },
-                { step: 4, title: 'Coverage Options', description: 'Choose your protection level' },
-                { step: 5, title: 'Get Quote', description: 'Review and save your quote' },
-              ].map(({ step, title, description }) => (
-                <div key={step} className="text-center">
+                { title: 'Frontend', description: 'Next.js with App Router\nTypeScript & Tailwind' },
+                { title: 'Backend', description: 'Django REST API\nPostgreSQL Database' },
+                { title: 'Authentication', description: 'Clerk Integration\nJWT Token Handling' },
+                { title: 'Deployment', description: 'Vercel Platform\nServerless Functions' },
+              ].map(({ title, description }, index) => (
+                <div key={index} className="text-center">
                   <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-semibold">
-                    {step}
+                    {index + 1}
                   </div>
                   <h3 className="font-semibold mb-2">{title}</h3>
-                  <p className="text-sm text-gray-600">{description}</p>
+                  <p className="text-sm text-gray-600 whitespace-pre-line">{description}</p>
                 </div>
               ))}
             </div>
@@ -91,24 +90,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Why Choose AutoQuote?
+                              What&apos;s Included
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              'Instant online quotes',
-              'Multiple coverage options',
-              'Competitive rates',
-              'No hidden fees',
-              'Expert customer support',
-              'Easy policy management',
-            ].map((benefit, index) => (
+              'Clerk Authentication System',
+              'Django REST API Endpoints',
+              'TypeScript Type Safety',
+              'Tailwind CSS Styling',
+              'ShadCN UI Components',
+              'Responsive Design',
+            ].map((feature, index) => (
               <div key={index} className="flex items-center space-x-3">
                 <CheckCircle className="h-5 w-5 text-green-600" />
-                <span className="text-lg">{benefit}</span>
+                <span className="text-lg">{feature}</span>
               </div>
             ))}
           </div>
@@ -119,14 +118,14 @@ export default function Home() {
       <section className="bg-blue-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Save on Your Auto Insurance?
+            Ready to Explore the Demo?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of drivers who trust AutoQuote for their insurance needs
+            Test the authentication flow and API integration
           </p>
-          <Link href="/quote">
+          <Link href="/dashboard">
             <Button size="lg" variant="secondary" className="text-lg px-8 py-6 h-auto">
-              Start Your Quote
+              Go to Dashboard
             </Button>
           </Link>
         </div>
@@ -135,7 +134,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 AutoQuote. All rights reserved.</p>
+          <p>&copy; 2025 Cursor Test. Django + Next.js Demo.</p>
         </div>
       </footer>
     </div>
